@@ -19,11 +19,11 @@ Alpha
 - [ ] Splash screen Designing
 - [ ] Login Integration
 
-__Dead line: 20th June, 2019__
+__Deadline: 20th June, 2019__
 
 ## Be a contributer
 Email request with __github profile__ link to asdevofficial@gmail.com
 
-## Version Build Deal Line : 10th August, 2019
+## Version Build Deadline : 10th August, 2019
 
 
