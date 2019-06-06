@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "637128384117",
+    "firebase_url": "https://penfightsapp.firebaseio.com",
+    "project_id": "penfightsapp",
+    "storage_bucket": "penfightsapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:637128384117:android:2761f3888d870c62",
+        "android_client_info": {
+          "package_name": "com.asdev.penfights"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "637128384117-rd3mobda5ihv0ujr3mcgf84o32ch0fgt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.asdev.penfights",
+            "certificate_hash": "49fbdf0c961a63bca302e9539270d124179778e9"
+          }
+        },
+        {
+          "client_id": "637128384117-42j7e91kl6bnq4inqsk1k4j8205kdp3n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAY4C4WWSNe3SlryZJxcyHV_CfZewfMlJ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "637128384117-42j7e91kl6bnq4inqsk1k4j8205kdp3n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
