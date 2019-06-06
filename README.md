@@ -1,6 +1,11 @@
 # Penfights
 Penfights is an open platform for creators to share their creative work like poems, stories, quotes and much more.
 
+### Project Managers
+- @amannirala13
+- @idkashutosh
+
+
 # Version: __1.0__
 Alpha
 
@@ -25,7 +30,3 @@ __Deadline: 20th June, 2019__
 Email request with __github profile__ link to asdevofficial@gmail.com
 
 ## Version Build Deadline : 10th August, 2019
-
-### Project Managers
-- @github/amannirala13
-- @github/idkashutosh
