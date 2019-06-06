@@ -5,7 +5,7 @@ Penfights is an open platform for creators to share their creative work like poe
 Wait for wireframes and documents.
 
 ## Be a contributer
-Email request with github profile link to asdevofficial@gmail.com
+Email request with _github profile_ link to asdevofficial@gmail.com
 
 ## ToDo
 
