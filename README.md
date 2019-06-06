@@ -29,7 +29,4 @@ Alpha
 
 __Deadline: 20th June, 2019__
 
-## Be a contributer
-Email request with __github profile__ link to asdevofficial@gmail.com
-
 ## Version Build Deadline : 10th August, 2019
