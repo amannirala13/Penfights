@@ -6,8 +6,8 @@ Alpha
 
 ## Developers Note
 - Stick to wireframes, graphics and design guildlines provided. 
-- Dont perform unnecessary changes or addition of features. 
-- Practice clean coading with proper comments.
+- Don't perform unnecessary changes or addition of features. 
+- Practice clean coding with proper comments.
 
 ## ToDo
 - [x] Linking to Backend
