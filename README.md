@@ -10,14 +10,14 @@ Penfights is an open platform for creators to share their creative work like poe
 Email request with __github profile__ link to asdevofficial@gmail.com
 
 ## ToDo
--[x] Linking to Backend
--[x] Linking crash reporting
--[ ] Wireframes
--[ ] User Interface Design
--[ ] API listing
--[ ] Theme Integration
--[ ] Splash screen Designing
--[ ] Login Integration
+- [x] Linking to Backend
+- [x] Linking crash reporting
+- [ ] Wireframes
+- [ ] User Interface Design
+- [ ] API listing
+- [ ] Theme Integration
+- [ ] Splash screen Designing
+- [ ] Login Integration
 
 __Dead line: 20th June, 2019__
 
