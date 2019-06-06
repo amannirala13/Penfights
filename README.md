@@ -5,7 +5,7 @@ Penfights is an open platform for creators to share their creative work like poe
 - [Aman Nirala](github.com/amannirala13)
 - [Ashutosh Dubey](github.com/idkashutosh)
 
-###Star Contributor
+### Star Contributor
 _Highest contributor will be displayed here_
 
 
