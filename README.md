@@ -2,8 +2,11 @@
 Penfights is an open platform for creators to share their creative work like poems, stories, quotes and much more.
 
 ### Project Managers
-- @amannirala13
-- @idkashutosh
+- [Aman Nirala](github.com/amannirala13)
+- [Ashutosh Dubey](github.com/idkashutosh)
+
+###Star Contributor
+_Highest contributor will be displayed here_
 
 
 # Version: __1.0__
