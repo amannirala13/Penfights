@@ -26,4 +26,6 @@ Email request with __github profile__ link to asdevofficial@gmail.com
 
 ## Version Build Deadline : 10th August, 2019
 
-
+### Project Managers
+- @github/amannirala13
+- @github/idkashutosh
