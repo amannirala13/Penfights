@@ -18,7 +18,7 @@ Alpha
 - Practice clean coding with proper comments.\
 
 ## Design guidlines
-Developers must stick to these guildlines strictly.
+Developers must stick to these guildlines strictly. _Reference: [Google Developers Guildlines](https://material.io/develop/android/) 
 ### Color Scheme
 - _Primary_ : __#ffffff__
 - _Primary dark_ : __#000000__
