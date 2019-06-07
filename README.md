@@ -15,7 +15,7 @@ Alpha
 ## Developers Note
 - Stick to wireframes, graphics and design guildlines provided. 
 - Don't perform unnecessary changes or addition of features. 
-- Practice clean coding with proper comments.\
+- Practice clean coding with proper comments.
 
 ## Design guidlines
 Developers must stick to these guildlines strictly. [Google Developers Guildlines](https://material.io/develop/android/) 
