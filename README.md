@@ -13,12 +13,12 @@ _Highest contributor will be displayed here_
 Alpha
 
 ## Developers Note
-- Stick to wireframes, graphics and design guildlines provided. 
+- Stick to wireframes, graphics and design guildelines provided. 
 - Don't perform unnecessary changes or addition of features. 
 - Practice clean coding with proper comments.
 
-## Design guidlines
-Developers must stick to these guildlines strictly. [Google Developers Guildlines](https://material.io/develop/android/) 
+## Design guidleines
+Developers must stick to these guildelines strictly. [Google Developers Guildlines](https://material.io/develop/android/) 
 ### Color Scheme
 - _Primary_ : __#ffffff__
 - _Primary dark_ : __#000000__
