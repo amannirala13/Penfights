@@ -23,6 +23,14 @@ Developers must stick to these guildlines strictly. [Google Developers Guildline
 - _Primary_ : __#ffffff__
 - _Primary dark_ : __#000000__
 - _Accent_ : __#ff5555__
+### Buttons
+#### Primary
+- _Color_ : __Accent__
+- _Theme_ : __Radial__ _(50dp)_
+#### Ripple
+- _Color_ : __#FFA6A6__
+- _Mask Shape_ : __Rectangle__
+- _Mask Color_ : __#ffffff__
 
 ## ToDo
 - [x] Linking to Backend
