@@ -15,7 +15,14 @@ Alpha
 ## Developers Note
 - Stick to wireframes, graphics and design guildlines provided. 
 - Don't perform unnecessary changes or addition of features. 
-- Practice clean coding with proper comments.
+- Practice clean coding with proper comments.\
+
+## Design guidlines
+Developers must stick to these guildlines strictly.
+### Color Scheme
+- _Primary_ : __#ffffff__
+- _Primary dark_ : __#000000__
+- _Accent_ : __#ff5555__
 
 ## ToDo
 - [x] Linking to Backend
