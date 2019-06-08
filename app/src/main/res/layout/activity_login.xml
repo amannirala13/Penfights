@@ -5,16 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Login">
-    <TextView
+    <Button
+        android:id="@+id/google_login_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/ripple"
         android:text="Login"
-        android:textColor="@color/colorAccent"
+        android:textColor="#fff"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_margin="15dp"
+        android:paddingHorizontal="90dp"
+        android:paddingVertical="15dp"
         app:layout_constraintEnd_toStartOf="parent"
         app:layout_constraintStart_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:textAllCaps="false"
         />
-
 
 </android.support.constraint.ConstraintLayout>

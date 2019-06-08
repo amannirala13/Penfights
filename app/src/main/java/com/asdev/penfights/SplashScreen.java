@@ -54,6 +54,7 @@ public class SplashScreen extends AppCompatActivity {
         {
             SharedPreferences.Editor editor = firstTimePref.edit();
             editor.putBoolean("firstTime",false);          // Changing firstTime to false and storing is shared preference so that next time it returns false
+
             editor.apply();
         }
         return firstTime;   // returning first run from shared Preferences
