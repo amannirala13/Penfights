@@ -14,15 +14,15 @@
         android:theme="@style/AppTheme">
         <activity android:name=".Login"></activity>
         <activity android:name=".FirstRun" />
-        <activity android:name=".SplashScreen" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".MainActivity">
+        </activity>
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="fd1dc6946242e95b347343fec300e3554407ab72" />
