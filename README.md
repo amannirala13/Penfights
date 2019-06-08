@@ -17,6 +17,9 @@ Alpha
 - Don't perform unnecessary changes or addition of features. 
 - Practice clean coding with proper comments.
 
+## Join Slack Workspace for Developers
+[Penfights workspace](https://join.slack.com/t/as-dev-workspace/shared_invite/enQtNjUzMDI0NjY0MzIxLWFmYzk3MzlmYmE5MWVjNDc5YjI4NzY0NDlhYzUzMWEzZjNjNjI1ZWFhZDgxMzY5MmNkMTZmYmMxODJiZTNkNDY)
+
 ## Design guidleines
 Developers must stick to these guildelines strictly. [Google Developers Guildlines](https://material.io/develop/android/) 
 ### Color Scheme
