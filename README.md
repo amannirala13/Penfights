@@ -36,14 +36,14 @@ Developers must stick to these guildelines strictly. [Google Developers Guildlin
 - _Mask Color_ : __#ffffff__
 
 ## ToDo
-- [x] Linking to Backend
-- [x] Linking crash reporting
 - [ ] Wireframes
 - [ ] User Interface Design
 - [ ] API listing
 - [ ] Theme Integration
 - [ ] Splash screen Designing
-- [ ] Login Integration
+- [x] Linking to Backend
+- [x] Linking crash reporting
+- [x] Login Integration
 
 __Deadline: 20th June, 2019__
 
