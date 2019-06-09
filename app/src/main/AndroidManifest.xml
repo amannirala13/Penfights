@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Login"></activity>
+        <activity android:name=".Register"></activity>
+        <activity android:name=".Login" />
         <activity android:name=".FirstRun" />
         <activity android:name=".SplashScreen">
             <intent-filter>
@@ -21,8 +22,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity">
-        </activity>
+        <activity android:name=".MainActivity"></activity>
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="fd1dc6946242e95b347343fec300e3554407ab72" />

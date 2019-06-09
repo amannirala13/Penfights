@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -19,16 +20,30 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Login extends AppCompatActivity {
 
+
+    //User Interface elements declaration
     private Button googleLoginBtn;
 
 
+    // Authentication elements declaration
     private FirebaseAuth mAuth;
     private GoogleSignInClient signInClient;
     private final static int RC_SIGN_IN = 1;
     private  GoogleSignInAccount account;
+    private String USER_ID;
+
+
+    //Database elements declaration
+    private FirebaseDatabase db = FirebaseDatabase.getInstance();
+    private DatabaseReference userDB = db.getReference().child("user").getRef();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,13 +55,15 @@ public class Login extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
 
-        // Configure Google Sign In
+        // Configuring Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
         signInClient = GoogleSignIn.getClient(this,gso);
 
+
+        //On Click Listeners
         googleLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,7 +74,7 @@ public class Login extends AppCompatActivity {
 
     }
 
-    public void signin()
+    public void signin()  // Initialises the signin process
     {
         Intent signinIntent = signInClient.getSignInIntent();
         startActivityForResult(signinIntent,RC_SIGN_IN);
@@ -71,15 +88,29 @@ public class Login extends AppCompatActivity {
         if (requestCode == RC_SIGN_IN) {
             Task <GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
-                // Google Sign In was successful, authenticate with Firebase
+                // Google Sign In was successful, authenticate with Firebase, check if he user exists in the database
                 account = task.getResult(ApiException.class);
-                firebaseAuthWithGoogle(account);
+                USER_ID = account.getId();
+                loginUser();
+
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
             }
         }
     }
 
+    // Sends user to registration screen bundling the google account
+    private void registeruserAction(GoogleSignInAccount account) {
+
+        Intent registerUserIntent = new Intent(Login.this, Register.class);
+        registerUserIntent.putExtra("GOOGLE_ACCOUNT", account);
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        finish();
+
+    }
+
+
+    //Authenticates the user to firebase.
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         mAuth.signInWithCredential(credential)
@@ -89,12 +120,40 @@ public class Login extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
-                        } else {
+                        }
+                        else
+                        {
                             // If sign in fails, display a message to the user.
                         }
 
                         // ...
                     }
                 });
+
     }
+
+        // Checks if the user exists in the database [ YES -> Login ] [ NO -> Register ]
+        private void loginUser()
+         {
+
+            userDB.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.hasChild(USER_ID))
+                    {
+                        firebaseAuthWithGoogle(account); // Authenticate the user with firebase
+                    }
+                    else
+                    {
+                        registeruserAction(account); // Take user to registration screen
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Toast.makeText(Login.this, "Problem in connection to server.", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
 }

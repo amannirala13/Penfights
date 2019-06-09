@@ -7,12 +7,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.google.firebase.database.FirebaseDatabase;
+
 public class SplashScreen extends AppCompatActivity {
+
+    private static Boolean PERSISTENCE_STATE = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+
+        //Offline caching of data for Firebase RealTime database
+        if(!PERSISTENCE_STATE)
+        {
+            FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+            PERSISTENCE_STATE = true;
+        }
 
 
         // Splash screen change
