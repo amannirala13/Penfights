@@ -23,24 +23,27 @@ Alpha
 ## Design guidleines
 Developers must stick to these guildelines strictly. [Google Developers Guildlines](https://material.io/develop/android/) 
 ### Color Scheme
-- _Primary_ : __#ffffff__
+- _Primary_ : __#FFFFFF__
 - _Primary dark_ : __#000000__
-- _Accent_ : __#ff5555__
+- _Accent_ : __#FF5555__
+- _Accent Secondary_ : __#FFA6A6__
 ### Buttons
 #### Primary
 - _Color_ : __Accent__
-- _Theme_ : __Radial__ _(50dp)_
+- _Theme_ : __Radial Stroke__
+- _Stroke_ : __2dp__
+-_Text Size_ : __18sp__ 
 #### Ripple
-- _Color_ : __#FFA6A6__
+- _Color_ : __Accent Secondary__
 - _Mask Shape_ : __Rectangle__
-- _Mask Color_ : __#ffffff__
+- _Mask Color_ : __#Accent Secondary__
 
 ## ToDo
-- [ ] Wireframes
 - [ ] User Interface Design
 - [ ] API listing
-- [ ] Theme Integration
 - [ ] Splash screen Designing
+- [x] Theme Integration
+- [x] Wireframes
 - [x] Linking to Backend
 - [x] Linking crash reporting
 - [x] Login Integration
