@@ -31,16 +31,14 @@ Developers must stick to these guildelines strictly. [Google Developers Guildlin
 #### Primary ( _Use resource_ : __ripple.xml__ )
 - _Color_ : __Accent__
 - _Theme_ : __Radial Stroke__
+- _Style_ : __Borderless__
 - _Stroke_ : __2dp__
 - _Text Size_ : __18sp__ 
-#### Ripple
-- _Color_ : __Accent Secondary__
-- _Mask Shape_ : __Rectangle__
-- _Mask Color_ : __#Accent Secondary__
 
 #### Secondary ( _Use resource_ : __ripple_borderless.xml__ )
 - _Color_ : __Accent Secondary__
 - _Theme_ : __Radial Ripple__
+- _Style_ : __Borderless__
 - _Stroke_ : __0dp__
 - _Text Size_ : __15sp__ 
 #### Ripple
