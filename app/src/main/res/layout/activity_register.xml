@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".Register">
 
-
+    <com.mikhaellopez.circularimageview.CircularImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_launcher_background"
+        app:civ_border_color="@color/colorAccent"
+        app:civ_border_width="2dp"
+        app:civ_shadow="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.179" />
 
 </android.support.constraint.ConstraintLayout>

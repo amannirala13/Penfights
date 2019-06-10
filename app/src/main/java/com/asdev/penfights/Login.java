@@ -105,6 +105,7 @@ public class Login extends AppCompatActivity {
         Intent registerUserIntent = new Intent(Login.this, Register.class);
         registerUserIntent.putExtra("GOOGLE_ACCOUNT", account);
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        startActivity(registerUserIntent);
         finish();
 
     }
