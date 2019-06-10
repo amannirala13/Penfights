@@ -7,13 +7,12 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:fillViewport="true"
-    android:background="@color/colorPrimary"
    >
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:background="@color/colorPrimary"
         android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
         tools:context=".Register">
 
         <TextView
@@ -36,6 +35,8 @@
 
         <android.support.design.circularreveal.cardview.CircularRevealCardView
             android:id="@+id/circularRevealCardView"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            app:cardBackgroundColor="@color/colorPrimary"
             android:layout_width="90dp"
             android:layout_height="90dp"
             android:layout_marginStart="8dp"
