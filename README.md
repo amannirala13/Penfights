@@ -32,7 +32,7 @@ Developers must stick to these guildelines strictly. [Google Developers Guildlin
 - _Color_ : __Accent__
 - _Theme_ : __Radial Stroke__
 - _Stroke_ : __2dp__
--_Text Size_ : __18sp__ 
+- _Text Size_ : __18sp__ 
 #### Ripple
 - _Color_ : __Accent Secondary__
 - _Mask Shape_ : __Rectangle__
