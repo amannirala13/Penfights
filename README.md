@@ -55,7 +55,7 @@ Developers must stick to these guildelines strictly. [Google Developers Guildlin
 
 #### User Input Text
 - _Color_ : __Primary dark__
--_Size_ : __18sp__
+- _Size_ : __18sp__
 
 ## ToDo
 - [ ] User Interface Design
