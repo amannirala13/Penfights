@@ -46,6 +46,17 @@ Developers must stick to these guildelines strictly. [Google Developers Guildlin
 - _Mask Shape_ : __Rectangle__
 - _Mask Color_ : __Accent Secondary__
 
+### Text
+#### Interface text
+- _Color_ : __Accent__
+- _Help Text Color_ : __Accent Secondary__
+- _Size_ : __18sp__
+- _Highlighed Size_ : __21sp__
+
+#### User Input Text
+- _Color_ : __Primary dark__
+-_Size_ : __18sp__
+
 ## ToDo
 - [ ] User Interface Design
 - [ ] API listing
