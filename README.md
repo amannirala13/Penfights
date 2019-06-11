@@ -44,7 +44,7 @@ Developers must stick to these guildelines strictly. [Google Developers Guildlin
 #### Ripple
 - _Color_ : __Accent Secondary__
 - _Mask Shape_ : __Rectangle__
-- _Mask Color_ : __#Accent Secondary__
+- _Mask Color_ : __Accent Secondary__
 
 ## ToDo
 - [ ] User Interface Design
