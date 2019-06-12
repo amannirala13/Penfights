@@ -49,6 +49,7 @@ dependencies {
     implementation 'com.daimajia.androidanimations:library:2.3@aar'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.github.yalantis:ucrop:2.2.3-native'
+    api 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'

@@ -21,6 +21,8 @@ import com.daimajia.androidanimations.library.YoYo;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.squareup.picasso.Picasso;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
 import com.yalantis.ucrop.UCrop;
 
 import java.io.IOException;
@@ -142,33 +144,41 @@ public class Register extends AppCompatActivity {
         if(requestCode == PROFILE_PIC_REQUEST_CODE && resultCode== RESULT_OK && data !=null && data.getData() != null)
         {
             profilePicUri = data.getData();   //Stores image URI
-           // openCropActivity(profilePicUri, profilePicUri);
-            try {
-
-                checkImageSize(profilePicUri);  //Checking Bitmap and loading
-
-            } catch (IOException e) {
-
-                Toast.makeText(this, "Error in loading image!", Toast.LENGTH_SHORT).show();  // Error if image at the URI is not available
-
-            }
+            openCropActivity(profilePicUri);
 
 
         }
-        else if (requestCode == UCrop.REQUEST_CROP &&  resultCode == RESULT_OK)
+        else if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE )
         {
-            final Uri resultUri = UCrop.getOutput(data);
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if(resultCode == RESULT_OK)
+            {
+                profilePicUri = result.getUri();
+                try {
+
+                    checkImageSize(profilePicUri);  //Checking Bitmap and loading
+
+                } catch (IOException e) {
+
+                    Toast.makeText(this, "Error in loading image!", Toast.LENGTH_SHORT).show();  // Error if image at the URI is not available
+
+                }
+            }
 
         }
     }
 
-    private void openCropActivity(Uri sourceUri, Uri destinationUri) {
+    private void openCropActivity(Uri sourceUri) {
 
-        UCrop.of(sourceUri, destinationUri)
-                .withMaxResultSize(180, 180)
-                .withAspectRatio(5f, 5f)
-                .start(Register.this);
-
+        CropImage.activity(sourceUri)
+                .setCropShape(CropImageView.CropShape.OVAL)
+                .setAspectRatio(1,1)
+                .setActivityTitle("")
+                .setAllowRotation(true)
+                .setAllowFlipping(true)
+                .setAutoZoomEnabled(true)
+                .setActivityMenuIconColor(R.color.colorAccent)
+                .start(this);
     }
 
     //Checks Bitmap size and compares it with runtime memory to prevent memory leaks
@@ -179,7 +189,7 @@ public class Register extends AppCompatActivity {
         Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), profilePicUri); //Converting URI to Bitmap
 
         if(bitmap.getByteCount()<maxMemory)
-            Picasso.get().load(profilePicUri).resize(600,600).centerCrop().into(profileView); // Rendering Bitmap
+            Picasso.get().load(profilePicUri).fit().into(profileView); // Rendering Bitmap
         else
         {
             Toast.makeText(this,  "Image very large in size!", Toast.LENGTH_SHORT).show(); // Memory leak found
