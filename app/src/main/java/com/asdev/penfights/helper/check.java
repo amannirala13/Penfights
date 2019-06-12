@@ -1,12 +1,15 @@
-package com.asdev.penfights;
+package com.asdev.penfights.helper;
 
 import android.os.Build;
 
+import com.asdev.penfights.countryCode;
 import com.google.android.material.textfield.TextInputEditText;
 
 import com.google.firebase.auth.FirebaseAuth;
 
 public class check {
+
+    public int GOOGLE_ACCOUNT_CHANGE_CALL_FLAG = -1;
 
     // Checks if the SDK is compatible i.e. Lollipop or higher
     public boolean compatibleSDK()

@@ -14,16 +14,17 @@ import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
+import com.asdev.penfights.helper.CustomToast;
+import com.asdev.penfights.helper.check;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
-import com.yalantis.ucrop.UCrop;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -37,6 +38,7 @@ public class Register extends AppCompatActivity {
     private ImageView profileView;
     private CardView profileViewContainer;
     private TextInputLayout userIDContainer, nameContainer, phoneContainer, aboutContainer;
+    private GoogleSignInAccount GOOGLE_ACCOUNT;
 
     // Values defined
     private String USER_ID, NAME, PHONE, ABOUT;
@@ -64,6 +66,8 @@ public class Register extends AppCompatActivity {
         continueBtn = findViewById(R.id.register_continue_btn);
         anotherGoogleButton = findViewById(R.id.register_another_google_btn);
 
+        GOOGLE_ACCOUNT = getIntent().getParcelableExtra("GOOGLE_ACCOUNT");
+
 
 
         //OnClick Listener for continue button
@@ -82,6 +86,11 @@ public class Register extends AppCompatActivity {
         anotherGoogleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Intent googleAccoutChangeIntent = new Intent(Register.this, Login.class);
+                googleAccoutChangeIntent.putExtra("CALL_FLAG", new check().GOOGLE_ACCOUNT_CHANGE_CALL_FLAG);
+                startActivity(googleAccoutChangeIntent);
+                overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
 
             }
         });
@@ -104,6 +113,8 @@ public class Register extends AppCompatActivity {
         });
 
     }
+
+
 
     //Sets country code to the phone text
     private void set_country_code(TextInputEditText phoneText) {
@@ -160,7 +171,7 @@ public class Register extends AppCompatActivity {
 
                 } catch (IOException e) {
 
-                    Toast.makeText(this, "Error in loading image!", Toast.LENGTH_SHORT).show();  // Error if image at the URI is not available
+                  showToast("Error in loading image!");  // Error if image at the URI is not available
 
                 }
             }
@@ -168,6 +179,7 @@ public class Register extends AppCompatActivity {
         }
     }
 
+    //Open the image to crop
     private void openCropActivity(Uri sourceUri) {
 
         CropImage.activity(sourceUri)
@@ -192,7 +204,7 @@ public class Register extends AppCompatActivity {
             Picasso.get().load(profilePicUri).fit().into(profileView); // Rendering Bitmap
         else
         {
-            Toast.makeText(this,  "Image very large in size!", Toast.LENGTH_SHORT).show(); // Memory leak found
+          showToast("Image very large in size!" );// Memory leak found
             openImageChooser();     //Recursion of image chooser
         }
     }
@@ -235,5 +247,13 @@ public class Register extends AppCompatActivity {
         }
 
         return validity;
+    }
+
+    private void showToast(String MESSAGE) {
+
+        CustomToast toast = new CustomToast(this);
+        toast.setMessage(MESSAGE);
+        toast.setLongDuration();
+        toast.show();
     }
 }

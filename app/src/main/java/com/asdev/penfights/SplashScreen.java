@@ -6,7 +6,12 @@ import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.asdev.penfights.helper.CustomToast;
+import com.asdev.penfights.helper.check;
+import com.crashlytics.android.Crashlytics;
 import com.google.firebase.database.FirebaseDatabase;
+
+import io.fabric.sdk.android.Fabric;
 
 public class SplashScreen extends AppCompatActivity {
 
@@ -15,6 +20,7 @@ public class SplashScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_splash_screen);
 
         //Offline caching of data for Firebase RealTime database
@@ -23,7 +29,6 @@ public class SplashScreen extends AppCompatActivity {
             FirebaseDatabase.getInstance().setPersistenceEnabled(true);
             PERSISTENCE_STATE = true;
         }
-
 
         // Splash screen change
         new Handler().postDelayed(new Runnable() {

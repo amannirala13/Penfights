@@ -6,8 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
+import com.asdev.penfights.helper.check;
+import com.asdev.penfights.helper.CustomToast;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -54,7 +55,6 @@ public class Login extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-
         // Configuring Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -70,6 +70,30 @@ public class Login extends AppCompatActivity {
                 signin();
             }
         });
+
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if(isGoogleAccountChangeCall())
+        {
+                signInClient.signOut();
+        }
+    }
+
+    private boolean isGoogleAccountChangeCall() {
+
+        int CALL_FLAG =getIntent().getIntExtra("CALL_FLAG",0);
+        if(CALL_FLAG == new check().GOOGLE_ACCOUNT_CHANGE_CALL_FLAG )
+        {
+            return true;
+        }
+        else
+            return false;
+
 
 
     }
@@ -95,7 +119,7 @@ public class Login extends AppCompatActivity {
                 loginUser();
 
             } catch (ApiException e) {
-                // Google Sign In failed, update UI appropriately
+                showToast("Oops! Unable to login");
             }
         }
     }
@@ -125,7 +149,7 @@ public class Login extends AppCompatActivity {
                         }
                         else
                         {
-                            // If sign in fails, display a message to the user.
+                            showToast("Oops! Unable to connect to server");
                         }
 
                         // ...
@@ -153,9 +177,16 @@ public class Login extends AppCompatActivity {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-                    Toast.makeText(Login.this, "Problem in connection to server.", Toast.LENGTH_SHORT).show();
+                    showToast("Problem in connection to server.");
                 }
             });
         }
 
+    private void showToast(String MESSAGE) {
+
+        CustomToast toast = new CustomToast(this);
+        toast.setMessage(MESSAGE);
+        toast.setLongDuration();
+        toast.show();
+    }
 }
