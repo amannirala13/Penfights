@@ -7,7 +7,6 @@ import androidx.cardview.widget.CardView;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -22,6 +21,7 @@ import com.daimajia.androidanimations.library.YoYo;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.squareup.picasso.Picasso;
+import com.yalantis.ucrop.UCrop;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -142,7 +142,7 @@ public class Register extends AppCompatActivity {
         if(requestCode == PROFILE_PIC_REQUEST_CODE && resultCode== RESULT_OK && data !=null && data.getData() != null)
         {
             profilePicUri = data.getData();   //Stores image URI
-
+           // openCropActivity(profilePicUri, profilePicUri);
             try {
 
                 checkImageSize(profilePicUri);  //Checking Bitmap and loading
@@ -152,7 +152,23 @@ public class Register extends AppCompatActivity {
                 Toast.makeText(this, "Error in loading image!", Toast.LENGTH_SHORT).show();  // Error if image at the URI is not available
 
             }
+
+
         }
+        else if (requestCode == UCrop.REQUEST_CROP &&  resultCode == RESULT_OK)
+        {
+            final Uri resultUri = UCrop.getOutput(data);
+
+        }
+    }
+
+    private void openCropActivity(Uri sourceUri, Uri destinationUri) {
+
+        UCrop.of(sourceUri, destinationUri)
+                .withMaxResultSize(180, 180)
+                .withAspectRatio(5f, 5f)
+                .start(Register.this);
+
     }
 
     //Checks Bitmap size and compares it with runtime memory to prevent memory leaks
@@ -161,8 +177,9 @@ public class Register extends AppCompatActivity {
         final int maxMemory = (int) (Runtime.getRuntime().maxMemory()); //Max Runtime memory in bytes
 
         Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), profilePicUri); //Converting URI to Bitmap
+
         if(bitmap.getByteCount()<maxMemory)
-            Picasso.get().load(profilePicUri).into(profileView); // Rendering Bitmap
+            Picasso.get().load(profilePicUri).resize(600,600).centerCrop().into(profileView); // Rendering Bitmap
         else
         {
             Toast.makeText(this,  "Image very large in size!", Toast.LENGTH_SHORT).show(); // Memory leak found
@@ -176,7 +193,6 @@ public class Register extends AppCompatActivity {
         NAME = Objects.requireNonNull(nameText.getText()).toString();
         PHONE = Objects.requireNonNull(phoneText.getText()).toString();
         ABOUT = Objects.requireNonNull(aboutText.getText()).toString();
-        Toast.makeText(this, USER_ID+NAME+PHONE+ABOUT, Toast.LENGTH_SHORT).show();
     }
 
     // Makes sure we get no null values
