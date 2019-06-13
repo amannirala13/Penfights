@@ -1,5 +1,6 @@
 package com.asdev.penfights;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -20,13 +21,26 @@ import com.asdev.penfights.helper.check;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Objects;
 
 public class Register extends AppCompatActivity {
@@ -41,9 +55,14 @@ public class Register extends AppCompatActivity {
     private GoogleSignInAccount GOOGLE_ACCOUNT;
 
     // Values defined
-    private String USER_ID, NAME, PHONE, ABOUT;
+    private String USER_ID, NAME, PHONE, ABOUT, EMAIL, REGISTERATION_DATE;
+    private Uri  PROFILE_PIC_URI;
     private int PROFILE_PIC_REQUEST_CODE = 1;
     private Uri profilePicUri;
+
+    private FirebaseAuth mAuth;
+    private FirebaseDatabase db = FirebaseDatabase.getInstance();
+    private DatabaseReference userDB = db.getReference().child("app").child("user").getRef();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,8 +85,10 @@ public class Register extends AppCompatActivity {
         continueBtn = findViewById(R.id.register_continue_btn);
         anotherGoogleButton = findViewById(R.id.register_another_google_btn);
 
+        //Variable Initiation
         GOOGLE_ACCOUNT = getIntent().getParcelableExtra("GOOGLE_ACCOUNT");
-
+        profilePicUri = Uri.parse("android.resource://com.asdev.penfights/drawable/ic_default_profile_pic");
+        mAuth = FirebaseAuth.getInstance();
 
 
         //OnClick Listener for continue button
@@ -78,6 +99,8 @@ public class Register extends AppCompatActivity {
               if(isValidInput())
               {
                   getValue();
+                  firebaseAuthWithGoogle(GOOGLE_ACCOUNT);
+
               }
             }
         });
@@ -87,10 +110,11 @@ public class Register extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent googleAccoutChangeIntent = new Intent(Register.this, Login.class);
-                googleAccoutChangeIntent.putExtra("CALL_FLAG", new check().GOOGLE_ACCOUNT_CHANGE_CALL_FLAG);
-                startActivity(googleAccoutChangeIntent);
+                Intent googleAccountChangeIntent = new Intent(Register.this, Login.class);
+                googleAccountChangeIntent.putExtra("CALL_FLAG", new check().GOOGLE_ACCOUNT_CHANGE_CALL_FLAG);
+                startActivity(googleAccountChangeIntent);
                 overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+                finish();
 
             }
         });
@@ -114,6 +138,73 @@ public class Register extends AppCompatActivity {
 
     }
 
+    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
+        AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            setRegistrationDate();
+                            setProfileDetails(user);
+                        }
+                        else
+                        {
+                            showToast("Oops! Unable to connect to server");
+                        }
+
+                        // ...
+                    }
+                });
+
+    }
+
+    private void setRegistrationDate() {
+        Date date = Calendar.getInstance() .getTime();
+        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+        String formattedDate = df.format(date);
+        REGISTERATION_DATE = formattedDate;
+    }
+
+    private void setProfileDetails(FirebaseUser user) {
+
+        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                .setDisplayName(NAME)
+                .setPhotoUri(PROFILE_PIC_URI)
+                .build();
+
+        user.updateProfile(profileUpdates)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            registerToDatabase();
+                        }
+                    }
+                });
+    }
+
+    private void registerToDatabase() {
+        final DatabaseReference currentUserDB = userDB.child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        currentUserDB.child("userID").setValue(USER_ID);
+        currentUserDB.child("Name").setValue(NAME);
+        currentUserDB.child("Email").setValue(EMAIL);
+        currentUserDB.child("Phone").setValue(PHONE);
+        currentUserDB.child("About").setValue(ABOUT);
+        currentUserDB.child("Reg_Date").setValue(REGISTERATION_DATE);
+        currentUserDB.child("Premium").setValue(false);
+
+        openGenreActivity();
+
+    }
+
+    private void openGenreActivity() {
+
+       startActivity(new Intent(Register.this, SplashScreen.class));
+        finish();
+    }
 
 
     //Sets country code to the phone text
@@ -197,7 +288,6 @@ public class Register extends AppCompatActivity {
     private void checkImageSize(Uri profilePicUri) throws IOException {
 
         final int maxMemory = (int) (Runtime.getRuntime().maxMemory()); //Max Runtime memory in bytes
-
         Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), profilePicUri); //Converting URI to Bitmap
 
         if(bitmap.getByteCount()<maxMemory)
@@ -211,10 +301,13 @@ public class Register extends AppCompatActivity {
 
     // Gets all the values from text fields
     private void getValue() {
+
         USER_ID = Objects.requireNonNull(userIDText.getText()).toString();
         NAME = Objects.requireNonNull(nameText.getText()).toString();
         PHONE = Objects.requireNonNull(phoneText.getText()).toString();
         ABOUT = Objects.requireNonNull(aboutText.getText()).toString();
+        EMAIL = GOOGLE_ACCOUNT.getEmail();
+        PROFILE_PIC_URI = profilePicUri;
     }
 
     // Makes sure we get no null values
@@ -222,33 +315,26 @@ public class Register extends AppCompatActivity {
 
         boolean validity = true;
 
-        if(Objects.requireNonNull(userIDText.getText()).toString().compareTo("")==0)
-        {
+        if(Objects.requireNonNull(userIDText.getText()).toString().compareTo("")==0) {
             YoYo.with(Techniques.Shake).duration(700).repeat(0).playOn(userIDContainer);
             validity = false;
         }
-
-        if(Objects.requireNonNull(nameText.getText()).toString().compareTo("")==0)
-        {
+        if(Objects.requireNonNull(nameText.getText()).toString().compareTo("")==0) {
             YoYo.with(Techniques.Shake).duration(700).repeat(0).playOn(nameContainer);
             validity = false;
         }
-
-        if (Objects.requireNonNull(phoneText.getText()).toString().compareTo("")==0)
-        {
+        if (Objects.requireNonNull(phoneText.getText()).toString().compareTo("")==0) {
             YoYo.with(Techniques.Shake).duration(700).repeat(0).playOn(phoneContainer);
             validity=false;
         }
-
-        if (Objects.requireNonNull(aboutText.getText()).toString().compareTo("")==0)
-        {
+        if (Objects.requireNonNull(aboutText.getText()).toString().compareTo("")==0) {
             YoYo.with(Techniques.Shake).duration(700).repeat(0).playOn(aboutContainer);
             validity = false;
         }
-
         return validity;
     }
 
+    //Creates Toast
     private void showToast(String MESSAGE) {
 
         CustomToast toast = new CustomToast(this);

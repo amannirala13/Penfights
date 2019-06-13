@@ -44,7 +44,7 @@ public class Login extends AppCompatActivity {
 
     //Database elements declaration
     private FirebaseDatabase db = FirebaseDatabase.getInstance();
-    private DatabaseReference userDB = db.getReference().child("user").getRef();
+    private DatabaseReference userDB = db.getReference().child("app").child("user").getRef();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
