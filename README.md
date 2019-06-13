@@ -58,9 +58,9 @@ Developers must stick to these guildelines strictly. [Google Developers Guildlin
 - _Size_ : __18sp__
 
 ## ToDo
-- [ ] User Interface Design
-- [ ] API listing
 - [ ] Splash screen Designing
+- [x] User Interface Design
+- [x] API listing
 - [x] Theme Integration
 - [x] Wireframes
 - [x] Linking to Backend
