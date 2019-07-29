@@ -59,14 +59,12 @@ Developers must stick to these guildelines strictly. [Google Developers Guildlin
 
 ## ToDo
 - [ ] Splash screen Designing
-- [x] User Interface Design
-- [x] API listing
-- [x] Theme Integration
-- [x] Wireframes
-- [x] Linking to Backend
-- [x] Linking crash reporting
-- [x] Login Integration
+- [x] Icon Design
+- [x] Post uploading and viewing features (inspiration : Instagram)
+- [x] Comment on Post feature
+- [x] Inegrating Firebase Cloud Messaging
+- [x] Animating components
 
-__Deadline: 20th June, 2019__
+__Deadline: 20th August, 2019__
 
-## Version Build Deadline : 10th August, 2019
+## Version Build Deadline : 10th September, 2019
