@@ -59,11 +59,11 @@ Developers must stick to these guildelines strictly. [Google Developers Guildlin
 
 ## ToDo
 - [ ] Splash screen Designing
-- [x] Icon Design
-- [x] Post uploading and viewing features (inspiration : Instagram)
-- [x] Comment on Post feature
-- [x] Inegrating Firebase Cloud Messaging
-- [x] Animating components
+- [ ] Icon Design
+- [ ] Post uploading and viewing features (inspiration : Instagram)
+- [ ] Comment on Post feature
+- [ ] Inegrating Firebase Cloud Messaging
+- [ ] Animating components
 
 __Deadline: 20th August, 2019__
 
