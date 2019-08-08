@@ -13,11 +13,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
-            android:theme="@style/CropTheme"/>
-        <activity android:name=".Register"
-            android:windowSoftInputMode="adjustPan"
-            ></activity>
+        <activity android:name=".Genre"></activity>
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/CropTheme" />
+        <activity
+            android:name=".Register"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".Login" />
         <activity android:name=".FirstRun" />
         <activity android:name=".SplashScreen">
@@ -27,7 +29,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
 
         <meta-data
             android:name="io.fabric.ApiKey"

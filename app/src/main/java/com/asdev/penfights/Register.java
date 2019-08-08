@@ -18,6 +18,7 @@ import android.widget.ImageView;
 
 import com.asdev.penfights.helper.CustomToast;
 import com.asdev.penfights.helper.check;
+import com.asdev.penfights.helper.countryCode;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -55,7 +56,7 @@ public class Register extends AppCompatActivity {
     private GoogleSignInAccount GOOGLE_ACCOUNT;
 
     // Values defined
-    private String USER_ID, NAME, PHONE, ABOUT, EMAIL, REGISTERATION_DATE;
+    private String USER_ID, NAME, PHONE, ABOUT, EMAIL, REGISTRATION_DATE;
     private Uri  PROFILE_PIC_URI;
     private int PROFILE_PIC_REQUEST_CODE = 1;
     private Uri profilePicUri;
@@ -165,7 +166,7 @@ public class Register extends AppCompatActivity {
         Date date = Calendar.getInstance() .getTime();
         SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
         String formattedDate = df.format(date);
-        REGISTERATION_DATE = formattedDate;
+        REGISTRATION_DATE = formattedDate;
     }
 
     private void setProfileDetails(FirebaseUser user) {
@@ -193,7 +194,7 @@ public class Register extends AppCompatActivity {
         currentUserDB.child("Email").setValue(EMAIL);
         currentUserDB.child("Phone").setValue(PHONE);
         currentUserDB.child("About").setValue(ABOUT);
-        currentUserDB.child("Reg_Date").setValue(REGISTERATION_DATE);
+        currentUserDB.child("Reg_Date").setValue(REGISTRATION_DATE);
         currentUserDB.child("Premium").setValue(false);
 
         openGenreActivity();
@@ -202,7 +203,7 @@ public class Register extends AppCompatActivity {
 
     private void openGenreActivity() {
 
-       startActivity(new Intent(Register.this, SplashScreen.class));
+        startActivity(new Intent(Register.this, Genre.class));
         finish();
     }
 

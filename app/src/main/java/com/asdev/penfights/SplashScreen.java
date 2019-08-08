@@ -41,16 +41,16 @@ public class SplashScreen extends AppCompatActivity {
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                     finish();
                 }
-                else if (new check().isValidUser())    // If the user is not logged in -> Login activity
+                else if (!new check().isValidUser())    // If the user is not logged in -> Login activity
                 {
-                    Intent mainActivityIntent = new Intent(SplashScreen.this,MainActivity.class);
+                    Intent mainActivityIntent = new Intent(SplashScreen.this,Login.class);
                     startActivity(mainActivityIntent);
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                     finish();
                 }
                 else   // If all gud -> Main activity
                 {
-                    Intent loginActivityIntent = new Intent(SplashScreen.this,Login.class);
+                    Intent loginActivityIntent = new Intent(SplashScreen.this,MainActivity.class);
                     startActivity(loginActivityIntent);
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                     finish();

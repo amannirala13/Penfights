@@ -1,4 +1,4 @@
-package com.asdev.penfights;
+package com.asdev.penfights.helper;
 
 public class countryCode {
     public static final String[] countryNames = { "Afghanistan", "Albania",
